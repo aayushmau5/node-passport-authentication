@@ -1,0 +1,35 @@
+//This will be a important notes on the passport authentication and how it works behind the scenes.
+
+User authentication options -> 1.Sessions (least complex)
+                               2.JWT(JSON web token)
+                               3.OAuth
+                               4.Other/Ad-Hoc
+
+Authentication -> Who the user is
+Authorization -> Who has the access
+
+Passport JS =>
+    *Strategy -> An authentication mechanism OR a way to verify.
+    
+    Passport JS is a framework that is a middleware that integrates with expressjs application.
+    It handle all the authentication logic using the specific Strategy that we choose.
+
+Few Points =>
+
+1. On each HTTP request, Passport will use a "Strategy" to determine whether the requestor has 
+permission to view that resource
+2. If the user does not have permission, a 401 Unauthorized Error is thrown
+3. Each Strategy uses the passportjs framework as a template
+
+* The local Strategy utilized cookies, express sessions and some authentication logic.
+
+HTTP Headers =>
+There are 3 types of headers => 1. General Header 
+                                2. Request Header 
+                                3. Response Header
+
+When we first visit a website, in Response header, there is a key value pair named 'set-cookie' which sets the 
+cookie in the client side. Now this cookie is sent to the server with every request header. 
+This cookie can be used for Authorization.
+
+Express Sessions =>
