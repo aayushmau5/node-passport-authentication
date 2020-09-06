@@ -1,5 +1,7 @@
 extends layout
 
 block content
-    h1 Welcome User
-    a(href="/logout") Logout
+    .authorized
+        h1 Welcome User
+        p This is a protected page which only logged in user can access. 
+    a.logout-link(href="/logout") Logout

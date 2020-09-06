@@ -7,9 +7,12 @@ const LocalStrategy = require("passport-local").Strategy;
 const MongoStore = require("connect-mongo")(session);
 const User = require("./models/user");
 const bcrypt = require("bcryptjs");
+const router = require("./routes/route");
 
 const app = express();
 require("dotenv").config();
+
+app.use(express.static(__dirname + "/public"));
 
 //setting the template engine
 app.set("views", path.join(__dirname, "/views"));
@@ -74,8 +77,7 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 //routes
-app.get("/", (req, res, next) => res.render("index"));
-app.get("/signup", (req, res, next) => res.render("signup"));
+app.use("/", router);
 app.post("/signup", (req, res, next) => {
   bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
     if (err) {

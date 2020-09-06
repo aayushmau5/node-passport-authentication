@@ -1,6 +1,14 @@
 extends layout
 
 block content
-    h1 LoginPage
-    a(href="/signup") Signup
-    a(href="/login") Login
+   h1 Welcome to Local Authorization Webpage
+   .instructions
+        p This is a prototype webpage which is used to authenticate the user.
+        .steps
+            p 1. Signup as a new user
+            p 2. Login
+            p 3. Access the protected <a href="/dashboard">/dashboard</a> page which an outsider user cannot access
+            p 4. Logout
+   .info
+        h3 This authentication is session based. It uses passport js along with passport-local strategy. 
+        h4 Link to the <a href="https://www.github.com/aayushmau5">repo</a>

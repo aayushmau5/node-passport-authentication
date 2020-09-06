@@ -1,0 +1,112 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+header {
+  padding: 10px 20px;
+  background-color: #645f59;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+}
+
+.logo a {
+  font-size: 40px;
+  font-weight: 900;
+  color: white;
+  flex: 1;
+}
+
+.links a {
+  padding: 20px 20px;
+  color: white;
+  transition: all 0.3s;
+}
+
+.links a:hover {
+  background-color: white;
+  color: black;
+}
+
+main {
+  padding: 40px;
+}
+
+.instructions {
+  font-size: 23px;
+  padding: 30px;
+  color: gray;
+}
+
+.steps {
+  margin-top: 40px;
+}
+
+.info h4 {
+  margin-top: 20px;
+  color: gray;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.signup-form {
+  border: 1px solid #eee;
+  width: 700px;
+  height: 350px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  font-size: 22px;
+}
+
+.form-control input {
+  margin-top: 5px;
+  border: 1px solid gray;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.btn {
+  background-color: rgb(90, 90, 90);
+  border: 1px solid gray;
+  padding: 5px 10px;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 19px;
+}
+
+.authorized {
+  margin-bottom: 25px;
+}
+
+.authorized h1 {
+  margin-bottom: 15px;
+}
+
+.logout-link {
+  font-size: 24px;
+  color: gray;
+}
