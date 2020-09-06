@@ -3,10 +3,8 @@ const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 const MongoStore = require("connect-mongo")(session);
-const User = require("./models/user");
-const bcrypt = require("bcryptjs");
+
 const router = require("./routes/route");
 
 const app = express();
@@ -41,36 +39,7 @@ app.use(
   })
 );
 
-//this will be called when we use the passport.authenticate() function.
-passport.use(
-  new LocalStrategy((username, password, done) => {
-    User.findOne({ username: username }, (err, user) => {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { msg: "Incorrect Username" });
-      }
-      bcrypt.compare(password, user.password, (err, res) => {
-        if (res) {
-          return done(null, user);
-        } else {
-          return done(null, false, { msg: "Incorrect password" });
-        }
-      });
-    });
-  })
-);
-
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
-});
+require("./controllers/passportController");
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -78,48 +47,5 @@ app.use(express.urlencoded({ extended: false }));
 
 //routes
 app.use("/", router);
-app.post("/signup", (req, res, next) => {
-  bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-    if (err) {
-      return next(err);
-    }
-    const user = new User({
-      username: req.body.username,
-      password: hashedPassword,
-    });
-    user.save((err) => {
-      if (err) {
-        return next(err);
-      }
-      res.redirect("/");
-    });
-  });
-});
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/",
-  })
-);
-app.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
-
-app.get("/dashboard", isLoggedIn, (req, res) => {
-  res.render("dashboard");
-});
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    return res.redirect("/login");
-  }
-}
 
 app.listen(3000);
